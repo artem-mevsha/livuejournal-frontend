@@ -1,0 +1,30 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+@import "variables";
+
+$navbar-breakpoint: $tablet!default;
+$box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+$box-link-hover-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0px 0 1px rgba(10,10,10,.02);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "primary-light": ($primary-light, $primary-light-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "danger-light": ($danger-light, $danger-light-invert)
+);
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+.main-container {
+  padding: 1rem;
+}
