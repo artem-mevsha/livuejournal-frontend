@@ -7,7 +7,7 @@
         :article="article"
       />
     </section>
-    <lv-article-list-pagination />
+    <lv-article-list-pagination v-if="articles.length" />
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div>
     <div class="container main-container">
       <section class="columns">
-        <main class="column is-9">
+        <div class="column is-9">
           <div class="tabs">
             <ul>
               <li class="is-active">
@@ -14,7 +14,7 @@
             </ul>
           </div>
           <lv-article-list :articles="articles" />
-        </main>
+        </div>
         <aside class="column is-3">
           <lv-tag-list :tags="tags" />
         </aside>
@@ -29,12 +29,15 @@ import { mapGetters } from 'vuex'
 import LvArticleList from '../components/ArticleList'
 import LvTagList from '../components/TagList'
 
+import paginationScroll from '~/mixins/pagination-scroll'
+
 export default {
   name: 'HomePage',
   components: {
     LvArticleList,
     LvTagList
   },
+  mixins: [paginationScroll],
   middleware: ['auth'],
   async fetch({ store, route }) {
     store.dispatch('feed/fetchTags')

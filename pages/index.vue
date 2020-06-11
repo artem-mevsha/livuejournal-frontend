@@ -3,7 +3,7 @@
     <lv-banner v-if="!isLoggedIn" />
     <div class="container main-container">
       <section class="columns">
-        <main class="column is-9">
+        <div class="column is-9">
           <div class="tabs">
             <ul>
               <li v-if="isLoggedIn">
@@ -20,7 +20,7 @@
             </ul>
           </div>
           <lv-article-list :articles="articles" />
-        </main>
+        </div>
         <aside class="column is-3">
           <lv-tag-list :tags="tags" />
         </aside>
@@ -36,6 +36,8 @@ import LvBanner from '../components/TheBanner'
 import LvArticleList from '../components/ArticleList'
 import LvTagList from '../components/TagList'
 
+import paginationScroll from '~/mixins/pagination-scroll'
+
 export default {
   name: 'HomePage',
   components: {
@@ -43,6 +45,7 @@ export default {
     LvArticleList,
     LvTagList
   },
+  mixins: [paginationScroll],
   async fetch({ store, route }) {
     store.dispatch('feed/fetchTags')
     await store.dispatch('feed/fetchArticles', {
@@ -62,11 +65,6 @@ export default {
     }
   },
   watchQuery: true, // watch for query change. Ex ?tag=sometag || ?page=5
-  methods: {
-    isFeedActive(feedType) {
-      return feedType === this.feedType
-    }
-  },
   head: {
     title: `LivueJournal`
   }

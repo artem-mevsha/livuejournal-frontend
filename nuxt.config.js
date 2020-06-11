@@ -59,7 +59,13 @@ export default {
           // you must have it in your node_modules to actually import
           {
             set: '@fortawesome/free-solid-svg-icons',
-            icons: ['faReply', 'faRetweet', 'faHeart']
+            icons: [
+              'faReply',
+              'faRetweet',
+              'faHeart',
+              'faChevronLeft',
+              'faChevronRight'
+            ]
           }
         ]
       }
@@ -105,10 +111,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
-      if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-      }
-    }
+    extend(config, ctx) {}
   }
 }

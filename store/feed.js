@@ -24,7 +24,8 @@ export const getters = {
   },
   pagination(state) {
     return {
-      total: state.articlesCount
+      total: state.articlesCount,
+      perPage: state.filters.limit
     }
   }
 }
@@ -51,10 +52,13 @@ export const actions = {
       fetchUrl = '/articles/feed'
     }
     try {
+      const offset = state.filters.limit * (query.page - 1)
       const requestQuery = {
-        offset: state.filters.offset,
+        offset: offset || 0,
         limit: state.filters.limit,
-        tag: query.tag
+        tag: query.tag,
+        author: query.author,
+        favorited: query.favorited
       }
       const response = await this.$axios.$get(fetchUrl, {
         params: requestQuery

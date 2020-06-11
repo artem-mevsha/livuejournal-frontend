@@ -4,7 +4,7 @@
       <div class="column is-6 is-offset-3">
         <h1 class="title has-text-centered">Sign in</h1>
         <h3 class="subtitle has-text-centered">
-          <nuxt-link to="/auth/login">Need an account?</nuxt-link>
+          <nuxt-link to="/auth/signup">Need an account?</nuxt-link>
         </h3>
 
         <lv-errors v-if="errors" :errors="errors" />

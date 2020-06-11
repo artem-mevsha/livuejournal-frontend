@@ -20,10 +20,10 @@
     <template slot="end">
       <template v-if="isAuthenticated && loggedInUser">
         <b-navbar-dropdown :label="loggedInUser.username">
-          <b-navbar-item :to="getProfileUrl()" tag="nuxt-link">
+          <b-navbar-item :to="getProfileUrl('user')" tag="nuxt-link">
             My profile
           </b-navbar-item>
-          <b-navbar-item :to="getProfileUrl('user-settings')" tag="nuxt-link">
+          <b-navbar-item :to="getProfileUrl('settings')" tag="nuxt-link">
             Settings
           </b-navbar-item>
           <b-navbar-item @click.prevent="logout">
@@ -87,17 +87,16 @@ export default {
   },
   methods: {
     /**
-     * @param {String} pageName - 'user' for profile page, 'user-settings' for settings page
-     * @return {Object} - route Object
+     * @param {String} pageName - 'user' for profile page, 'settings' for settings page
+     * @return {String} - route path
      */
     getProfileUrl(pageName = 'user') {
       if (this.isAuthenticated) {
-        return {
-          name: pageName,
-          params: {
-            user: `@${this.loggedInUser.username}`
-          }
+        const { username } = this.loggedInUser
+        if (pageName === 'settings') {
+          return `/@${username}/settings`
         }
+        return `/@${username}`
       }
       return '/'
     },

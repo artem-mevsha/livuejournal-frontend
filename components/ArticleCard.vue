@@ -1,5 +1,5 @@
 <template>
-  <a :href="`/articles/${article.slug}`" class="card box">
+  <nuxt-link :to="`/articles/${article.slug}`" class="card box">
     <div class="card-content">
       <div class="media">
         <div v-if="article.author.image" class="media-left">
@@ -8,12 +8,12 @@
           </figure>
         </div>
         <div class="media-content">
-          <a
-            :href="`/@${article.author.username}`"
+          <nuxt-link
+            :to="`/@${article.author.username}`"
             class="title is-6 is-block article-author"
           >
             {{ article.author.username }}
-          </a>
+          </nuxt-link>
           <p class="subtitle is-7">
             <time :datetime="article.createdAt">
               {{ article.createdAt }}
@@ -28,7 +28,7 @@
         <p class="is-size-7">Read more...</p>
       </div>
     </div>
-  </a>
+  </nuxt-link>
 </template>
 
 <script>
