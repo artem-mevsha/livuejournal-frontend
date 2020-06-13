@@ -31,14 +31,14 @@ export default {
       loggedInUser: 'loggedInUser'
     })
     // authorData:
-    // author - from authorData
+    // authorName - from authorData
     // authorRoute - from authorData
     // favoritesRoute - from authorData
   },
   watchQuery: true, // watch for query change. Ex ?tag=sometag || ?page=5
   head() {
     return {
-      title: `${this.author} profile - LivueJournal`
+      title: `${this.authorData.authorName} profile - LivueJournal`
     }
   }
 }

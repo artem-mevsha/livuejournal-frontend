@@ -1,6 +1,6 @@
 <template>
   <div>
-    <lv-profile-banner />
+    <lv-profile-banner v-if="profile" :profile="profile" />
     <div class="container main-container">
       <section class="columns">
         <div class="column is-10 is-offset-1">
@@ -32,15 +32,25 @@ import authorData from '~/mixins/author-data'
 
 export default {
   name: 'HomePage',
-  mixins: [authorData],
   components: {
     LvProfileBanner
   },
-  async fetch({ store, route }) {},
+  mixins: [authorData],
+  async fetch({ store, route, redirect }) {
+    let userName = route.params.user
+
+    // don't fetch profile if userName is wrong
+    if (userName.length > 1) {
+      userName = userName.slice(1, userName.length)
+    }
+
+    await store.dispatch('profile/fetchProfile', userName)
+  },
   computed: {
     ...mapGetters({
       isLoggedIn: 'isAuthenticated',
-      loggedInUser: 'loggedInUser'
+      loggedInUser: 'loggedInUser',
+      profile: 'profile/profile'
     })
     // authorData:
     // author - from authorData
