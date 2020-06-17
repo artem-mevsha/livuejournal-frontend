@@ -5,7 +5,7 @@ export default {
       // if it's current user - return 'My'
       const authorId = this.$route.params.user
       let authorName = authorId.slice(1, authorId.length)
-      if (authorName === this.loggedInUser.username) {
+      if (this.loggedInUser && authorName === this.loggedInUser.username) {
         authorName = 'My'
       }
 

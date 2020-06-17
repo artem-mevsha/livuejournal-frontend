@@ -21,7 +21,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#68D391' },
   /*
    ** Global CSS
    */
@@ -64,7 +64,9 @@ export default {
               'faRetweet',
               'faHeart',
               'faChevronLeft',
-              'faChevronRight'
+              'faChevronRight',
+              'faPlus',
+              'faMinus'
             ]
           }
         ]
@@ -102,6 +104,15 @@ export default {
     },
     redirect: {
       login: '/auth/login'
+    }
+  },
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      }
+
+      return { x: 0, y: 0 }
     }
   },
   /*

@@ -6,8 +6,6 @@
 import { mapGetters } from 'vuex'
 
 import LvArticleList from '@/components/ArticleList'
-
-import paginationScroll from '~/mixins/pagination-scroll'
 import authorData from '~/mixins/author-data'
 
 export default {
@@ -15,7 +13,7 @@ export default {
   components: {
     LvArticleList
   },
-  mixins: [paginationScroll, authorData],
+  mixins: [authorData],
   async fetch({ store, route }) {
     const authorId = route.params.user
     const favorited = authorId.slice(1, authorId.length)

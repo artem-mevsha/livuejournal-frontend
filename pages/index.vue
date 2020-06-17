@@ -36,8 +36,6 @@ import LvBanner from '../components/TheBanner'
 import LvArticleList from '../components/ArticleList'
 import LvTagList from '../components/TagList'
 
-import paginationScroll from '~/mixins/pagination-scroll'
-
 export default {
   name: 'HomePage',
   components: {
@@ -45,7 +43,6 @@ export default {
     LvArticleList,
     LvTagList
   },
-  mixins: [paginationScroll],
   async fetch({ store, route }) {
     store.dispatch('feed/fetchTags')
     await store.dispatch('feed/fetchArticles', {

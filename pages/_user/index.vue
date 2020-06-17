@@ -7,12 +7,15 @@
           <div class="tabs">
             <ul>
               <li :class="tabClass('articles')">
-                <nuxt-link :to="authorData.authorRoute">
+                <nuxt-link :to="authorData.authorRoute" class="is-capitalized">
                   {{ authorData.authorName }} articles
                 </nuxt-link>
               </li>
               <li :class="tabClass('favorited')">
-                <nuxt-link :to="authorData.favoritesRoute">
+                <nuxt-link
+                  :to="authorData.favoritesRoute"
+                  class="is-capitalized"
+                >
                   Favorited articles
                 </nuxt-link>
               </li>

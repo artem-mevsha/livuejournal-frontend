@@ -29,15 +29,12 @@ import { mapGetters } from 'vuex'
 import LvArticleList from '../components/ArticleList'
 import LvTagList from '../components/TagList'
 
-import paginationScroll from '~/mixins/pagination-scroll'
-
 export default {
   name: 'HomePage',
   components: {
     LvArticleList,
     LvTagList
   },
-  mixins: [paginationScroll],
   middleware: ['auth'],
   async fetch({ store, route }) {
     store.dispatch('feed/fetchTags')
