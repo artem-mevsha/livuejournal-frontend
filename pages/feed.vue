@@ -30,7 +30,7 @@ import LvArticleList from '../components/ArticleList'
 import LvTagList from '../components/TagList'
 
 export default {
-  name: 'HomePage',
+  name: 'FeedPage',
   components: {
     LvArticleList,
     LvTagList
@@ -51,7 +51,7 @@ export default {
     })
   },
   head: {
-    title: 'My feed - LivueJournal'
+    title: `My feed - ${process.env.title}`
   }
 }
 </script>

@@ -2,8 +2,10 @@
   <div>
     <lv-profile-banner v-if="profile" :profile="profile" />
     <div class="container main-container">
-      <section class="columns">
-        <div class="column is-10 is-offset-1">
+      <section class="columns is-desktop">
+        <div
+          class="column is-8-widescreen is-offset-2-widescreen is-10-desktop is-offset-1-desktop"
+        >
           <div class="tabs">
             <ul>
               <li :class="tabClass('articles')">

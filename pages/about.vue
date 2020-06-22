@@ -15,7 +15,7 @@
 <script>
 export default {
   head: {
-    title: `About - LivueJournal`
+    title: `About - ${process.env.title}`
   }
 }
 </script>

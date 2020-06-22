@@ -86,7 +86,7 @@ export default {
     }
   },
   head: {
-    title: `Sign in - Livuejournal`
+    title: `Login - ${process.env.title}`
   }
 }
 </script>

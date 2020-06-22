@@ -61,9 +61,6 @@ export default {
       return this.$route.query.tag
     }
   },
-  watchQuery: true, // watch for query change. Ex ?tag=sometag || ?page=5
-  head: {
-    title: `LivueJournal`
-  }
+  watchQuery: true // watch for query change. Ex ?tag=sometag || ?page=5
 }
 </script>

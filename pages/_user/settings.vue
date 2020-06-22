@@ -107,7 +107,7 @@ export default {
     }
   },
   page: {
-    title: `Settings - LivueJournal`
+    title: `Settings - ${process.env.title}`
   }
 }
 </script>

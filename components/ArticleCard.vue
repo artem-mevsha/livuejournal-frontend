@@ -1,26 +1,10 @@
 <template>
   <nuxt-link :to="`/articles/${article.slug}`" class="card box">
     <div class="card-content">
-      <div class="media">
-        <div v-if="article.author.image" class="media-left">
-          <figure class="image is-32x32">
-            <img :src="article.author.image" :alt="article.author.name" />
-          </figure>
-        </div>
-        <div class="media-content">
-          <nuxt-link
-            :to="`/@${article.author.username}`"
-            class="title is-6 is-block article-author"
-          >
-            {{ article.author.username }}
-          </nuxt-link>
-          <p class="subtitle is-7">
-            <time :datetime="article.createdAt">
-              {{ article.createdAt }}
-            </time>
-          </p>
-        </div>
-      </div>
+      <lv-article-author
+        :profile="article.author"
+        :created-at="article.createdAt"
+      ></lv-article-author>
 
       <div class="content">
         <h3 class="title article-title is-4">{{ article.title }}</h3>
@@ -32,8 +16,13 @@
 </template>
 
 <script>
+import LvArticleAuthor from './ArticleAuthor'
+
 export default {
   name: 'LvArticleCard',
+  components: {
+    LvArticleAuthor
+  },
   props: {
     article: {
       type: Object,

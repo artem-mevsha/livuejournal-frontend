@@ -27,7 +27,7 @@ export const actions = {
     commit('SET_PROFILE', response.profile)
   },
 
-  async fetchProfileUnFollow({ commit }, userName) {
+  async fetchProfileUnfollow({ commit }, userName) {
     const response = await this.$axios.$delete(`/profiles/${userName}/follow`)
     commit('SET_PROFILE', response.profile)
   }
