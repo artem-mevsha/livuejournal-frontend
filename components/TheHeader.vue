@@ -1,7 +1,7 @@
 <template>
   <b-navbar class="is-spaced">
     <template slot="brand">
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
+      <b-navbar-item tag="nuxt-link" :to="homePath">
         <span class="has-text-primary">Livue</span>
         <span>Journal</span>
       </b-navbar-item>
@@ -19,6 +19,9 @@
 
     <template slot="end">
       <template v-if="isAuthenticated && loggedInUser">
+        <b-navbar-item tag="nuxt-link" :to="{ path: '/editor' }">
+          New article
+        </b-navbar-item>
         <b-navbar-dropdown :label="loggedInUser.username">
           <b-navbar-item :to="getProfileUrl('user')" tag="nuxt-link">
             My profile
@@ -83,6 +86,9 @@ export default {
     }
   },
   computed: {
+    homePath() {
+      return this.isAuthenticated ? '/feed' : '/'
+    },
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   methods: {

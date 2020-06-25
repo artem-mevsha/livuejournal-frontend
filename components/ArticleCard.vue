@@ -4,6 +4,7 @@
       <lv-article-author
         :profile="article.author"
         :created-at="article.createdAt"
+        class="article-meta"
       ></lv-article-author>
 
       <div class="content">

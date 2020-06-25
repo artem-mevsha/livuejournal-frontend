@@ -3,7 +3,12 @@
     <div class="content has-text-centered">
       <p>
         Realworld app clone. Built with Vue.js, Nuxt and Bulma.
-        <a href="#" target="_blank">Fork on Github</a>
+        <a
+          href="https://github.com/artem-mevsha/livuejournal-frontend"
+          target="_blank"
+        >
+          Fork on Github
+        </a>
       </p>
     </div>
   </footer>

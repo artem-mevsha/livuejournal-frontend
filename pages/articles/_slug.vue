@@ -56,8 +56,10 @@ export default {
       profile: 'profile/profile'
     })
   },
-  head: {
-    title: `${process.env.title}`
+  head() {
+    return {
+      title: `${this.article.title} - ${process.env.title}`
+    }
   }
 }
 </script>

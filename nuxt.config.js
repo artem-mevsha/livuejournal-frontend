@@ -67,13 +67,17 @@ export default {
               'faChevronLeft',
               'faChevronRight',
               'faPlus',
-              'faMinus'
+              'faMinus',
+              'faEdit'
             ]
           }
         ]
       }
     ]
   ],
+  buefy: {
+    materialDesignIcons: false
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

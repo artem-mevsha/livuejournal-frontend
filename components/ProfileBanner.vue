@@ -17,7 +17,10 @@
                 :to="`/@${loggedInUser.username}/settings`"
                 class="button is-light"
               >
-                Edit profile
+                <span class="icon is-small">
+                  <fa :icon="['fas', 'edit']"></fa>
+                </span>
+                <span>Edit profile</span>
               </nuxt-link>
               <lv-article-button-follow
                 v-else

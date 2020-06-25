@@ -19,12 +19,24 @@
       </p>
     </div>
     <div v-if="buttonsEnabled" class="media-right">
-      <div class="buttons are-small">
+      <div
+        v-if="loggedInUser.username === profile.username"
+        class="buttons are-small"
+      >
+        <nuxt-link :to="`/editor/${slug}`" class="button is-light">
+          <span class="icon is-small">
+            <fa :icon="['fas', 'edit']"></fa>
+          </span>
+          <span>Edit article</span>
+        </nuxt-link>
+      </div>
+      <div v-else class="buttons are-small">
         <lv-article-button-follow
           :username="profile.username"
           :following="profile.following"
         />
         <lv-article-button-favorite
+          :v-if="slug.length"
           :slug="slug"
           :favorited="favorited"
           :favorites-count="favoritesCount"
@@ -35,6 +47,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import LvArticleButtonFollow from './ArticleButtonFollow'
 import LvArticleButtonFavorite from './ArticleButtonFavorite'
 
@@ -47,7 +61,7 @@ export default {
   props: {
     slug: {
       type: String,
-      required: true
+      default: ''
     },
     profile: {
       type: Object,
@@ -73,6 +87,9 @@ export default {
       type: Number,
       default: 0
     }
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   methods: {
     imageSizeClass() {

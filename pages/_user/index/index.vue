@@ -9,7 +9,7 @@ import LvArticleList from '@/components/ArticleList'
 import authorData from '~/mixins/author-data'
 
 export default {
-  name: 'HomePage',
+  name: 'UserFeedPage',
   components: {
     LvArticleList
   },

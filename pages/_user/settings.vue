@@ -114,5 +114,6 @@ export default {
 
 <style lang="sass" scoped>
 .buttons
+  margin-top: 1.5rem
   justify-content: space-between
 </style>
