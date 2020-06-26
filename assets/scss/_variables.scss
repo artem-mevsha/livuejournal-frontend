@@ -6,6 +6,8 @@ $footer-padding: 2rem 1.5rem;
 // Set colors
 $primary: #68D391;
 $primary-invert: #fff;
+$danger: #ff3860;
+$danger-invert: #fff;
 $danger-light: #feecf0;
 $danger-light-invert: #cc0f35;
 $primary-light: #ebfffc;
@@ -15,3 +17,4 @@ $primary-light-invert: #00947e;
 $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
+$link-as-text: #363636;

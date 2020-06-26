@@ -6,7 +6,7 @@
       'is-dark': following
     }"
     class="button"
-    @click.prevent="updateFollow()"
+    @click.prevent="updateFollow"
   >
     <span class="icon is-small">
       <fa :icon="['fas', `${followUserIcon}`]"></fa>

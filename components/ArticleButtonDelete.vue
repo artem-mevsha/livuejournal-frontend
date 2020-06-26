@@ -48,7 +48,7 @@ export default {
         this.$router.push('/feed')
       } catch (e) {
         Snackbar.open({
-          message: 'Cannot delete story. Please, try again',
+          message: `Cannot delete story. Error: ${e}`,
           type: 'is-danger'
         })
       }

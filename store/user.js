@@ -71,7 +71,7 @@ export const actions = {
       }
 
       return Snackbar.open({
-        message: 'Cannot update user. Please, try again',
+        message: `Cannot update user. Error: ${e}`,
         type: 'is-danger'
       })
     }

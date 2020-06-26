@@ -27,6 +27,7 @@
             class="article-tags"
           />
         </div>
+        <lv-comments :slug="article.slug" />
       </div>
     </div>
   </div>
@@ -38,13 +39,15 @@ import VueMarkdown from 'vue-markdown'
 
 import LvArticleAuthor from '@/components/ArticleAuthor'
 import LvArticleTaglist from '@/components/ArticleTaglist'
+import LvComments from '@/components/Comments'
 
 export default {
   name: 'ArticlesPage',
   components: {
     VueMarkdown,
     LvArticleAuthor,
-    LvArticleTaglist
+    LvArticleTaglist,
+    LvComments
   },
   async fetch({ store, route }) {
     const slug = route.params.slug
@@ -54,7 +57,6 @@ export default {
     ...mapGetters({
       isAuthenticated: 'isAuthenticated',
       article: 'article/article',
-      comments: 'article/comments',
       profile: 'profile/profile'
     })
   },
