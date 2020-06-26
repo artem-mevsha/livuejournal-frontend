@@ -5,7 +5,11 @@
         <div class="columns">
           <div class="column is-10 is-offset-1">
             <figure class="image is-64x64">
-              <img :src="profile.image" class="is-rounded" />
+              <img
+                :src="profile.image"
+                :alt="profile.username"
+                class="is-rounded"
+              />
             </figure>
             <h1 class="subtitle has-text-centered">{{ profile.username }}</h1>
             <div class="profile-bio has-text-centered">
@@ -73,5 +77,6 @@ export default {
   background-color: #fff
 
 .profile-bio
-  margin-bottom: 1rem
+  margin: 0 auto 1rem
+  max-width: 600px
 </style>

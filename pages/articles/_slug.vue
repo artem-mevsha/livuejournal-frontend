@@ -19,7 +19,7 @@
             :buttons-enabled="true"
           ></lv-article-author>
           <div class="article-body">
-            <p>{{ article.body }}</p>
+            <vue-markdown>{{ article.body }}</vue-markdown>
           </div>
           <lv-article-taglist
             v-if="article.tagList"
@@ -34,6 +34,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import VueMarkdown from 'vue-markdown'
 
 import LvArticleAuthor from '@/components/ArticleAuthor'
 import LvArticleTaglist from '@/components/ArticleTaglist'
@@ -41,6 +42,7 @@ import LvArticleTaglist from '@/components/ArticleTaglist'
 export default {
   name: 'ArticlesPage',
   components: {
+    VueMarkdown,
     LvArticleAuthor,
     LvArticleTaglist
   },

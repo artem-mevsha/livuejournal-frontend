@@ -58,7 +58,7 @@ export const actions = {
 
       if (slug) {
         // edit existing article
-        response = await this.$axios.put(`articles/${slug}`, {
+        response = await this.$axios.put(`/articles/${slug}`, {
           article: {
             title: state.article.title,
             description: state.article.description,
@@ -67,7 +67,7 @@ export const actions = {
         })
       } else {
         // create new article
-        response = await this.$axios.post('articles', {
+        response = await this.$axios.post('/articles', {
           article: {
             ...state.article
           }
@@ -92,8 +92,14 @@ export const actions = {
       title: '',
       description: '',
       body: '',
+      bodyHTML: '',
       tagList: []
     })
+  },
+
+  async deleteArticle({ dispatch }, slug) {
+    await this.$axios.$delete(`/articles/${slug}`)
+    dispatch('clearArticle')
   },
 
   async favoriteArticle({ commit }, slug) {

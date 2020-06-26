@@ -29,6 +29,7 @@
           </span>
           <span>Edit article</span>
         </nuxt-link>
+        <lv-article-button-delete :v-if="slug.length" :slug="slug" />
       </div>
       <div v-else class="buttons are-small">
         <lv-article-button-follow
@@ -51,12 +52,14 @@ import { mapGetters } from 'vuex'
 
 import LvArticleButtonFollow from './ArticleButtonFollow'
 import LvArticleButtonFavorite from './ArticleButtonFavorite'
+import LvArticleButtonDelete from './ArticleButtonDelete'
 
 export default {
   name: 'LvArticleAuthor',
   components: {
     LvArticleButtonFollow,
-    LvArticleButtonFavorite
+    LvArticleButtonFavorite,
+    LvArticleButtonDelete
   },
   props: {
     slug: {
