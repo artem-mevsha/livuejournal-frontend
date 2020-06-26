@@ -39,7 +39,7 @@
               v-model="tagList"
               ellipsis
               placeholder="Add a tag"
-              :disabled="isLoading || slug"
+              :disabled="isLoading || isArticleCreated"
             >
             </b-taginput>
           </b-field>
@@ -62,6 +62,7 @@
 import { mapGetters } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import { SnackbarProgrammatic as Snackbar } from 'buefy'
+
 import LvErrors from '@/components/BaseErrors'
 
 export default {
@@ -94,6 +95,12 @@ export default {
       const title = 'New story'
       return title
     },
+    isArticleCreated() {
+      if (this.$route.params.slug) {
+        return true
+      }
+      return false
+    },
     ...mapFields('article', [
       'article.title',
       'article.description',
@@ -117,7 +124,7 @@ export default {
       } catch (e) {
         if (e.response && e.response.status === 500) {
           Snackbar.open({
-            message: 'Cannot publish story. Please, try again',
+            message: `Cannot publish story. Error: ${e}`,
             type: 'is-danger'
           })
         }

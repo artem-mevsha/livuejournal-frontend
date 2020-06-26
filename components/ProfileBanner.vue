@@ -4,9 +4,12 @@
       <div class="container">
         <div class="columns">
           <div class="column is-10 is-offset-1">
-            <figure class="image is-64x64">
-              <img :src="profile.image" class="is-rounded" />
-            </figure>
+            <lv-profile-image
+              :profile-image="profile.image"
+              :profile-name="profile.username"
+              :size-class="'is-64x64'"
+              class="author-image"
+            />
             <h1 class="subtitle has-text-centered">{{ profile.username }}</h1>
             <div class="profile-bio has-text-centered">
               <p>{{ profile.bio }}</p>
@@ -37,11 +40,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
+import LvProfileImage from './ProfileImage'
 import LvArticleButtonFollow from './ArticleButtonFollow'
 
 export default {
   name: 'LvProfileBanner',
   components: {
+    LvProfileImage,
     LvArticleButtonFollow
   },
   props: {
@@ -65,13 +71,13 @@ export default {
 .hero-inner
   padding: 1rem
 
-.image
+.author-image
   margin-left: auto
   margin-right: auto
   margin-bottom: 1rem
   border-radius: 50%
-  background-color: #fff
 
 .profile-bio
-  margin-bottom: 1rem
+  margin: 0 auto 1rem
+  max-width: 600px
 </style>

@@ -79,7 +79,7 @@ export const actions = {
       commit('SET_TAGS', response.tags)
     } catch (e) {
       return Snackbar.open({
-        message: 'Cannot get tags. Please, reload the page',
+        message: `Cannot get tags. Error: ${e}`,
         type: 'is-danger'
       })
     }

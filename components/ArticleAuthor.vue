@@ -1,22 +1,26 @@
 <template>
   <div class="media">
-    <div v-if="profile.image" class="media-left">
-      <figure class="image" :class="imageSizeClass()">
-        <img :src="profile.image" :alt="profile.name" />
-      </figure>
+    <div class="media-left">
+      <nuxt-link :to="`/@${profile.username}`">
+        <lv-profile-image
+          :profile-image="profile.image"
+          :profile-name="profile.username"
+          :size-class="'is-32x32'"
+          class="author-image"
+        />
+      </nuxt-link>
     </div>
     <div class="media-content">
-      <nuxt-link
-        :to="`/@${profile.username}`"
-        class="title is-6 is-block article-author"
-      >
-        {{ profile.username }}
+      <nuxt-link :to="`/@${profile.username}`" class="author-link">
+        <h5 class="title is-6 is-block article-author">
+          {{ profile.username }}
+        </h5>
+        <p v-if="createdAt" class="subtitle is-7">
+          <time :datetime="createdAt">
+            {{ createdAt }}
+          </time>
+        </p>
       </nuxt-link>
-      <p class="subtitle is-7">
-        <time :datetime="createdAt">
-          {{ createdAt }}
-        </time>
-      </p>
     </div>
     <div v-if="buttonsEnabled" class="media-right">
       <div
@@ -29,6 +33,7 @@
           </span>
           <span>Edit article</span>
         </nuxt-link>
+        <lv-article-button-delete :v-if="slug.length" :slug="slug" />
       </div>
       <div v-else class="buttons are-small">
         <lv-article-button-follow
@@ -49,14 +54,18 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import LvProfileImage from './ProfileImage'
 import LvArticleButtonFollow from './ArticleButtonFollow'
 import LvArticleButtonFavorite from './ArticleButtonFavorite'
+import LvArticleButtonDelete from './ArticleButtonDelete'
 
 export default {
   name: 'LvArticleAuthor',
   components: {
+    LvProfileImage,
     LvArticleButtonFollow,
-    LvArticleButtonFavorite
+    LvArticleButtonFavorite,
+    LvArticleButtonDelete
   },
   props: {
     slug: {
@@ -69,7 +78,7 @@ export default {
     },
     createdAt: {
       type: String,
-      required: true
+      default: ''
     },
     imageSize: {
       type: String,
@@ -90,14 +99,6 @@ export default {
   },
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
-  },
-  methods: {
-    imageSizeClass() {
-      if (this.imageSize === 'medium') {
-        return 'is-48x48'
-      }
-      return 'is-32x32'
-    }
   }
 }
 </script>
@@ -105,13 +106,24 @@ export default {
 <style lang="sass" scoped>
 @import "~bulma/sass/utilities/initial-variables.sass";
 @import "~bulma/sass/utilities/mixins.sass";
+@import "~assets/scss/variables";
 
 .media
   margin-bottom: 2rem
 
-.image
+.author-image
   margin-left: 0
   margin-right: 0
+
+.author-link
+  .title,
+  .subtitle
+    color: $link-as-text
+  &:hover
+    .title,
+    .subtitle
+      color: $link
+
 
 +mobile
   .media

@@ -45,8 +45,6 @@ export const actions = {
     commit('profile/SET_PROFILE', response.article.author, { root: true })
   },
 
-  fetchComments() {},
-
   async saveArticle({ commit, state, dispatch }, slug) {
     if (state.errors) {
       commit('SET_ERRORS', null)
@@ -58,7 +56,7 @@ export const actions = {
 
       if (slug) {
         // edit existing article
-        response = await this.$axios.put(`articles/${slug}`, {
+        response = await this.$axios.put(`/articles/${slug}`, {
           article: {
             title: state.article.title,
             description: state.article.description,
@@ -67,7 +65,7 @@ export const actions = {
         })
       } else {
         // create new article
-        response = await this.$axios.post('articles', {
+        response = await this.$axios.post('/articles', {
           article: {
             ...state.article
           }
@@ -92,8 +90,14 @@ export const actions = {
       title: '',
       description: '',
       body: '',
+      bodyHTML: '',
       tagList: []
     })
+  },
+
+  async deleteArticle({ dispatch }, slug) {
+    await this.$axios.$delete(`/articles/${slug}`)
+    dispatch('clearArticle')
   },
 
   async favoriteArticle({ commit }, slug) {
@@ -104,5 +108,26 @@ export const actions = {
   async unfavoriteArticle({ commit }, slug) {
     const response = await this.$axios.$delete(`/articles/${slug}/favorite`)
     commit('SET_ARTICLE', response.article)
+  },
+
+  async fetchComments({ commit }, slug) {
+    const response = await this.$axios.$get(`/articles/${slug}/comments`)
+    commit('SET_COMMENTS', response.comments)
+  },
+
+  async createComment({ dispatch, state }, commentText) {
+    const slug = state.article.slug
+    await this.$axios.$post(`/articles/${slug}/comments`, {
+      comment: {
+        body: commentText
+      }
+    })
+    dispatch('fetchComments', slug)
+  },
+
+  async deleteComment({ dispatch, state }, id) {
+    const slug = state.article.slug
+    await this.$axios.$delete(`/articles/${slug}/comments/${id}`)
+    dispatch('fetchComments', slug)
   }
 }

@@ -6,6 +6,9 @@ export default {
    ** Headers of the page
    */
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: process.env.title || 'LivueJournal',
     meta: [
       { charset: 'utf-8' },
@@ -13,7 +16,21 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content:
+          process.env.npm_package_description ||
+          'Blogging platform build with Nuxt'
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content:
+          process.env.npm_package_description ||
+          'Blogging platform build with Nuxt'
+      },
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: process.env.title || 'LivueJournal'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
@@ -32,7 +49,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/error.filter'],
+  plugins: ['~/plugins/error.filter.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -68,7 +85,8 @@ export default {
               'faChevronRight',
               'faPlus',
               'faMinus',
-              'faEdit'
+              'faEdit',
+              'faTrash'
             ]
           }
         ]

@@ -6,6 +6,7 @@
         <a
           href="https://github.com/artem-mevsha/livuejournal-frontend"
           target="_blank"
+          rel="noreferrer"
         >
           Fork on Github
         </a>

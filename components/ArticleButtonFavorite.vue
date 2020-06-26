@@ -2,7 +2,7 @@
   <button
     :class="{ 'is-loading': isFavoriteUpdating }"
     class="button is-primary-light"
-    @click.prevent="toggleFavorite()"
+    @click.prevent="toggleFavorite"
   >
     <span class="icon is-small">
       <fa :icon="['fas', 'heart']"></fa>

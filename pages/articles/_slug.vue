@@ -19,7 +19,7 @@
             :buttons-enabled="true"
           ></lv-article-author>
           <div class="article-body">
-            <p>{{ article.body }}</p>
+            <vue-markdown>{{ article.body }}</vue-markdown>
           </div>
           <lv-article-taglist
             v-if="article.tagList"
@@ -27,6 +27,7 @@
             class="article-tags"
           />
         </div>
+        <lv-comments :slug="article.slug" />
       </div>
     </div>
   </div>
@@ -34,15 +35,19 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import VueMarkdown from 'vue-markdown'
 
 import LvArticleAuthor from '@/components/ArticleAuthor'
 import LvArticleTaglist from '@/components/ArticleTaglist'
+import LvComments from '@/components/Comments'
 
 export default {
   name: 'ArticlesPage',
   components: {
+    VueMarkdown,
     LvArticleAuthor,
-    LvArticleTaglist
+    LvArticleTaglist,
+    LvComments
   },
   async fetch({ store, route }) {
     const slug = route.params.slug
@@ -52,7 +57,6 @@ export default {
     ...mapGetters({
       isAuthenticated: 'isAuthenticated',
       article: 'article/article',
-      comments: 'article/comments',
       profile: 'profile/profile'
     })
   },
