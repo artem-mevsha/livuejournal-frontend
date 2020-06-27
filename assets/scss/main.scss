@@ -13,7 +13,6 @@ $colors: (
     "light": ($light, $light-invert),
     "dark": ($dark, $dark-invert),
     "primary": ($primary, $primary-invert),
-    "primary-light": ($primary-light, $primary-light-invert),
     "info": ($info, $info-invert),
     "success": ($success, $success-invert),
     "warning": ($warning, $warning-invert),
@@ -27,4 +26,13 @@ $colors: (
 
 .main-container {
   padding: 1rem;
+}
+
+.icon.is-largest {
+  width: 5rem;
+  height: 5rem;
+  .svg-inline--fa {
+    width: 3rem;
+    height: 2.5rem;
+  }
 }

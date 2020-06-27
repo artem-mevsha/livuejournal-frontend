@@ -29,7 +29,6 @@
             <b-input
               v-model.lazy="body"
               type="textarea"
-              maxlength="400"
               placeholder="Write your story. You can use markdown"
               :disabled="isLoading"
             ></b-input>

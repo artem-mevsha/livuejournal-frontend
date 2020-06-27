@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{ 'is-loading': isFavoriteUpdating }"
-    class="button is-primary-light"
+    class="button is-primary"
     @click.prevent="toggleFavorite"
   >
     <span class="icon is-small">

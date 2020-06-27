@@ -7,13 +7,30 @@
         <lv-errors v-if="errors" :errors="errors" />
 
         <form novalidate @submit.prevent="updateUser">
-          <b-field label="Avatar">
-            <b-input
-              v-model.lazy="image"
-              type="text"
-              placeholder="URL of profile picture"
+          <b-field label="Your avatar">
+            <b-upload
+              v-model="image"
+              drag-drop
+              type="is-primary"
+              accept="image/*.jpeg,image/*.png,image/*.jpg,image/*.gif"
+              class="upload"
               :disabled="isLoading"
-            ></b-input>
+              @input="onImageChange"
+            >
+              <section class="section">
+                <div class="content has-text-centered">
+                  <p>
+                    <span class="icon is-largest">
+                      <fa :icon="['fas', 'upload']"></fa>
+                    </span>
+                  </p>
+                  <p>Drop your files here or click to upload</p>
+                </div>
+              </section>
+            </b-upload>
+            <figure v-if="image">
+              <img :src="image" :alt="username" />
+            </figure>
           </b-field>
           <b-field label="Your name">
             <b-input
@@ -83,7 +100,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      password: ''
+      password: '',
+      imageFile: null
     }
   },
   computed: {
@@ -100,10 +118,20 @@ export default {
         username: this.username,
         email: this.email,
         bio: this.bio,
-        image: this.image,
+        image: this.imageFile,
         password: this.password || undefined
       })
       this.isLoading = false
+    },
+
+    onImageChange(file) {
+      if (file && file.type.includes('image/')) {
+        this.isLoading = true
+        this.imageFile = file
+
+        // await this.$store.dispatch('user/updateUserImage', file)
+        this.isLoading = false
+      }
     }
   },
   page: {
@@ -113,6 +141,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.upload
+  max-width: 13.6rem
+  .section
+    padding: 2rem 1rem
+
 .buttons
   margin-top: 1.5rem
   justify-content: space-between

@@ -41,7 +41,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#68D391' },
+  loading: { color: '#38b2ac' },
   /*
    ** Global CSS
    */
@@ -86,7 +86,8 @@ export default {
               'faPlus',
               'faMinus',
               'faEdit',
-              'faTrash'
+              'faTrash',
+              'faUpload'
             ]
           }
         ]

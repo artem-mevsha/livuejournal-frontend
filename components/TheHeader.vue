@@ -1,9 +1,9 @@
 <template>
   <b-navbar class="is-spaced">
     <template slot="brand">
-      <b-navbar-item tag="nuxt-link" :to="homePath">
-        <span class="has-text-primary">Livue</span>
-        <span>Journal</span>
+      <b-navbar-item tag="nuxt-link" :to="homePath" class="logo is-size-5">
+        <span>Livue</span>
+        <span class="has-text-primary">Journal</span>
       </b-navbar-item>
     </template>
     <template slot="start">
@@ -116,6 +116,9 @@ export default {
 <style lang="sass">
 @import "~bulma/sass/utilities/initial-variables.sass";
 @import "~bulma/sass/utilities/mixins.sass";
+
+.logo
+  font-weight: 600
 
 +tablet-only
   .navbar-menu

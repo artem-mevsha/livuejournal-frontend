@@ -20,7 +20,7 @@
         <nav class="level">
           <div class="level-left">
             <b-button
-              type="is-info"
+              type="is-light"
               native-type="submit"
               class="level-item"
               :disabled="isLoading"
