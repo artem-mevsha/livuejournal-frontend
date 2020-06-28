@@ -49,7 +49,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/error.filter.js'],
+  plugins: [
+    '~/plugins/error.filter.js',
+    '~/plugins/cloudinary.js',
+    '~/plugins/upload-api.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */

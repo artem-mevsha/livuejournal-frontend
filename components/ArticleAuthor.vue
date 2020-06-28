@@ -114,6 +114,7 @@ export default {
 .author-image
   margin-left: 0
   margin-right: 0
+  border-radius: 5px
 
 .author-link
   .title,

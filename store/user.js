@@ -1,5 +1,5 @@
 import { getField, updateField } from 'vuex-map-fields'
-import { SnackbarProgrammatic as Snackbar } from 'buefy'
+import { ToastProgrammatic as Toast } from 'buefy'
 
 export const state = () => ({
   errors: null,
@@ -17,10 +17,11 @@ export const mutations = {
   updateField,
 
   SET_USER(state, userData) {
-    state.email = userData.email
-    state.username = userData.username
-    state.image = userData.image
-    state.bio = userData.bio
+    const { email, username, image, bio } = userData
+    state.email = email || state.email
+    state.username = username || state.username
+    state.image = image || state.image
+    state.bio = bio || state.bio
   },
 
   SET_ERRORS(state, errors) {
@@ -40,10 +41,11 @@ export const actions = {
       })
       return
     } catch (e) {
-      return Snackbar.open({
+      Toast.open({
         message: 'Cannot get user info. Please, try again',
         type: 'is-danger'
       })
+      throw e
     }
   },
 
@@ -56,13 +58,14 @@ export const actions = {
         user
       })
 
+      commit('SET_USER', {
+        ...response.data.user
+      })
+
       const token = response.data.user.token
       await this.$auth.setUserToken(token)
 
-      Snackbar.open({
-        message: 'User info has been updated',
-        type: 'is-primary'
-      })
+      Toast.open('User info has been updated')
     } catch (e) {
       if (e.response) {
         if (e.response.data && e.response.data.errors) {
@@ -70,7 +73,7 @@ export const actions = {
         }
       }
 
-      return Snackbar.open({
+      return Toast.open({
         message: `Cannot update user. Error: ${e}`,
         type: 'is-danger'
       })

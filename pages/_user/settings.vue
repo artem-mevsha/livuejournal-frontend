@@ -8,11 +8,32 @@
 
         <form novalidate @submit.prevent="updateUser">
           <b-field label="Your avatar">
+            <figure v-if="image" class="image is-128x128">
+              <cld-image
+                :public-id="image"
+                height="128"
+                width="128"
+                crop="fill"
+                loading="lazy"
+              >
+                <cld-transformation dpr="2.0" />
+              </cld-image>
+              <button
+                class="button is-dark image-delete is-small"
+                type="button"
+                @click="deleteImage"
+              >
+                <span class="icon">
+                  <fa :icon="['fas', 'trash']"></fa>
+                </span>
+              </button>
+            </figure>
             <b-upload
-              v-model="image"
+              v-else
+              v-model="imageFile"
               drag-drop
               type="is-primary"
-              accept="image/*.jpeg,image/*.png,image/*.jpg,image/*.gif"
+              accept="image/*"
               class="upload"
               :disabled="isLoading"
               @input="onImageChange"
@@ -28,9 +49,6 @@
                 </div>
               </section>
             </b-upload>
-            <figure v-if="image">
-              <img :src="image" :alt="username" />
-            </figure>
           </b-field>
           <b-field label="Your name">
             <b-input
@@ -86,6 +104,8 @@
 
 <script>
 import { mapFields } from 'vuex-map-fields'
+
+import imageUpload from '@/mixins/image-upload'
 import LvErrors from '@/components/BaseErrors'
 
 export default {
@@ -93,6 +113,7 @@ export default {
   components: {
     LvErrors
   },
+  mixins: [imageUpload],
   middleware: ['auth', 'belongs-to-user'],
   async fetch({ store }) {
     await store.dispatch('user/getUser')
@@ -118,20 +139,34 @@ export default {
         username: this.username,
         email: this.email,
         bio: this.bio,
-        image: this.imageFile,
+        image: this.image,
         password: this.password || undefined
       })
       this.isLoading = false
     },
 
-    onImageChange(file) {
-      if (file && file.type.includes('image/')) {
-        this.isLoading = true
-        this.imageFile = file
-
-        // await this.$store.dispatch('user/updateUserImage', file)
+    async onImageChange(file) {
+      this.isLoading = true
+      try {
+        const response = await this.imageUpload(file, 'avatar')
+        this.$store.commit('user/SET_USER', {
+          image: response.public_id
+        })
+      } catch (e) {
+        this.$buefy.toast.open({
+          message: e,
+          type: 'is-danger'
+        })
+      } finally {
         this.isLoading = false
       }
+    },
+
+    deleteImage() {
+      this.imageFile = {}
+      this.$store.commit('user/SET_USER', {
+        image: ''
+      })
     }
   },
   page: {
@@ -145,6 +180,11 @@ export default {
   max-width: 13.6rem
   .section
     padding: 2rem 1rem
+
+.image-delete
+  position: absolute
+  top: 0.5rem
+  right: 0.5rem
 
 .buttons
   margin-top: 1.5rem

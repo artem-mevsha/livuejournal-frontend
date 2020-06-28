@@ -33,7 +33,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import LvProfileBanner from '@/components/ProfileBanner'
-import authorData from '~/mixins/author-data'
+import authorData from '@/mixins/author-data'
 
 export default {
   name: 'HomePage',

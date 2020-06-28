@@ -1,6 +1,16 @@
 <template>
-  <figure class="image" :class="sizeClass">
-    <img :src="processedImage" :alt="profileName" class="img" />
+  <figure class="image image" :class="sizeClass">
+    <cld-image
+      v-if="profileImage"
+      :public-id="profileImage"
+      height="128"
+      width="128"
+      crop="fill"
+      loading="lazy"
+    >
+      <cld-transformation dpr="2.0" />
+    </cld-image>
+    <img v-else src="/images/placeholder-avatar.png" :alt="profileName" />
   </figure>
 </template>
 
@@ -20,23 +30,13 @@ export default {
       type: String,
       default: 'is-32x32'
     }
-  },
-  computed: {
-    processedImage() {
-      if (this.profileImage && this.profileImage.length) {
-        return this.profileImage
-      }
-      return '/images/placeholder-avatar.png'
-    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
 .image
-  border-radius: 5px
   background-color: #fff
-
-.img
-  border-radius: inherit
+  border-radius: 5px
+  overflow: hidden
 </style>

@@ -60,7 +60,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
-import { SnackbarProgrammatic as Snackbar } from 'buefy'
 
 import LvErrors from '@/components/BaseErrors'
 
@@ -116,14 +115,11 @@ export default {
         await this.$store.dispatch('article/saveArticle', slug)
         this.$router.push('/feed')
 
-        Snackbar.open({
-          message: 'Story has been published',
-          type: 'is-primary'
-        })
+        this.$buefy.toast.open('Story has been published')
       } catch (e) {
         if (e.response && e.response.status === 500) {
-          Snackbar.open({
-            message: `Cannot publish story. Error: ${e}`,
+          this.$buefy.toast.open({
+            message: `Cannot publish story. ${e}`,
             type: 'is-danger'
           })
         }

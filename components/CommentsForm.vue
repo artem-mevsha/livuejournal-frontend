@@ -36,7 +36,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { SnackbarProgrammatic as Snackbar } from 'buefy'
 
 import LvProfileImage from './ProfileImage'
 
@@ -61,8 +60,8 @@ export default {
         await this.$store.dispatch('article/createComment', this.commentText)
         this.commentText = ''
       } catch (e) {
-        Snackbar.open({
-          message: `Cannot comment this story. Error: ${e}`,
+        this.$buefy.toast.open({
+          message: `Cannot comment this story. ${e}`,
           type: 'is-danger'
         })
       } finally {

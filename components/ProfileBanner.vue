@@ -7,7 +7,7 @@
             <lv-profile-image
               :profile-image="profile.image"
               :profile-name="profile.username"
-              :size-class="'is-64x64'"
+              :size-class="'is-128x128'"
               class="author-image"
             />
             <h1 class="subtitle has-text-centered">{{ profile.username }}</h1>
