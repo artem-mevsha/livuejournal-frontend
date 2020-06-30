@@ -3,6 +3,12 @@ require('dotenv').config()
 export default {
   mode: 'spa',
   /*
+   ** Fixing Netlify 404 error
+   */
+  generate: {
+    fallback: true
+  },
+  /*
    ** Headers of the page
    */
   head: {
