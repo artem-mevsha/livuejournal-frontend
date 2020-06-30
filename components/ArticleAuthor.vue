@@ -17,7 +17,7 @@
         </h5>
         <p v-if="createdAt" class="subtitle is-7">
           <time :datetime="createdAt">
-            {{ createdAt }}
+            {{ createdAt | date }}
           </time>
         </p>
       </nuxt-link>

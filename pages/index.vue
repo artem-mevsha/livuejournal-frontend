@@ -3,7 +3,7 @@
     <lv-banner v-if="!isLoggedIn" />
     <div class="container main-container">
       <section class="columns">
-        <div class="column is-9">
+        <div class="column is-12 is-9-desktop">
           <div class="tabs">
             <ul>
               <li v-if="isLoggedIn">
@@ -21,7 +21,7 @@
           </div>
           <lv-article-list :articles="articles" />
         </div>
-        <aside class="column is-3">
+        <aside class="column is-12 is-3-desktop">
           <lv-tag-list :tags="tags" />
         </aside>
       </section>

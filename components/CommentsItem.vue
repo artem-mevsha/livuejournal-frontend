@@ -10,7 +10,7 @@
       <div class="content">
         <p>
           <strong>{{ comment.author.username }}</strong>
-          <small>{{ comment.createdAt }}</small>
+          <small>{{ comment.createdAt | date }}</small>
           <br />
           {{ comment.body }}
         </p>

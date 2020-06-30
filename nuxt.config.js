@@ -53,8 +53,8 @@ export default {
    */
   plugins: [
     '~/plugins/error.filter.js',
-    '~/plugins/cloudinary.js',
-    '~/plugins/upload-api.js'
+    '~/plugins/date.filter.js',
+    '~/plugins/cloudinary.js'
   ],
   /*
    ** Nuxt.js dev-modules
