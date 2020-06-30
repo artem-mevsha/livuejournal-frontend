@@ -35,7 +35,7 @@ export default {
       return tag === this.filteredTag
     },
     tagClass(tag) {
-      return this.isTagActive(tag) ? 'is-primary' : 'is-primary-light'
+      return this.isTagActive(tag) ? 'is-primary' : 'is-light'
     },
     tagLink(tag) {
       return this.isTagActive(tag) ? '/' : `/?tag=${tag}`

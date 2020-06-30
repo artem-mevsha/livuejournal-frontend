@@ -1,4 +1,4 @@
-import { SnackbarProgrammatic as Snackbar } from 'buefy'
+import { ToastProgrammatic as Toast } from 'buefy'
 
 export const state = () => ({
   articles: [],
@@ -42,6 +42,18 @@ export const mutations = {
   },
   SET_TAGS(state, tags) {
     state.tags = tags
+  },
+  UPDATE_ARTICLE_IN_LIST(state, data) {
+    // mutation is used only for favorite/unfavotire action
+    state.articles = state.articles.map((article) => {
+      if (article.slug !== data.slug) {
+        return article
+      }
+      // Change only favorited and favoritesCount props in state
+      article.favorited = data.favorited
+      article.favoritesCount = data.favoritesCount
+      return article
+    })
   }
 }
 
@@ -66,10 +78,11 @@ export const actions = {
       const { articles, articlesCount } = response
       commit('FETCH_END', { articles, articlesCount, requestQuery })
     } catch (e) {
-      return Snackbar.open({
+      Toast.open({
         message: 'Cannot get articles. Please, reload the page',
         type: 'is-danger'
       })
+      throw e
     }
   },
 
@@ -78,10 +91,11 @@ export const actions = {
       const response = await this.$axios.$get('/tags')
       commit('SET_TAGS', response.tags)
     } catch (e) {
-      return Snackbar.open({
-        message: `Cannot get tags. Error: ${e}`,
+      Toast.open({
+        message: `Cannot get tags. ${e}`,
         type: 'is-danger'
       })
+      throw e
     }
   }
 }

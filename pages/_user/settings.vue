@@ -7,13 +7,12 @@
         <lv-errors v-if="errors" :errors="errors" />
 
         <form novalidate @submit.prevent="updateUser">
-          <b-field label="Avatar">
-            <b-input
-              v-model.lazy="image"
-              type="text"
-              placeholder="URL of profile picture"
-              :disabled="isLoading"
-            ></b-input>
+          <b-field label="Your avatar">
+            <lv-image-upload
+              :image-model="image"
+              @change="onImageChange"
+              @delete="onImageDelete"
+            />
           </b-field>
           <b-field label="Your name">
             <b-input
@@ -69,12 +68,15 @@
 
 <script>
 import { mapFields } from 'vuex-map-fields'
+
 import LvErrors from '@/components/BaseErrors'
+import LvImageUpload from '@/components/ImageUpload'
 
 export default {
   name: 'SettingsPage',
   components: {
-    LvErrors
+    LvErrors,
+    LvImageUpload
   },
   middleware: ['auth', 'belongs-to-user'],
   async fetch({ store }) {
@@ -83,7 +85,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      password: ''
+      password: '',
+      imageFile: null
     }
   },
   computed: {
@@ -104,6 +107,14 @@ export default {
         password: this.password || undefined
       })
       this.isLoading = false
+    },
+
+    onImageChange(fileResponse) {
+      this.$store.dispatch('user/updateUserImage', fileResponse.public_id)
+    },
+
+    onImageDelete() {
+      this.$store.dispatch('user/updateUserImage', null)
     }
   },
   page: {

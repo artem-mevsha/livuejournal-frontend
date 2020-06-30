@@ -6,7 +6,7 @@
 import { mapGetters } from 'vuex'
 
 import LvArticleList from '@/components/ArticleList'
-import authorData from '~/mixins/author-data'
+import authorData from '@/mixins/author-data'
 
 export default {
   name: 'UserFeedPage',

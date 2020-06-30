@@ -1,5 +1,3 @@
-// import { SnackbarProgrammatic as Snackbar } from 'buefy'
-
 export const state = () => ({
   profile: {}
 })

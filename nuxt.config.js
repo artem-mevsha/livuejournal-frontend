@@ -41,7 +41,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#68D391' },
+  loading: { color: '#38b2ac' },
   /*
    ** Global CSS
    */
@@ -49,7 +49,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/error.filter.js'],
+  plugins: [
+    '~/plugins/error.filter.js',
+    '~/plugins/cloudinary.js',
+    '~/plugins/upload-api.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -86,7 +90,8 @@ export default {
               'faPlus',
               'faMinus',
               'faEdit',
-              'faTrash'
+              'faTrash',
+              'faUpload'
             ]
           }
         ]

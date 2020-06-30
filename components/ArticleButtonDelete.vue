@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import { SnackbarProgrammatic as Snackbar } from 'buefy'
-
 export default {
   name: 'LvArticleButtonDelete',
   props: {
@@ -41,14 +39,11 @@ export default {
     async deleteArticle() {
       try {
         await this.$store.dispatch('article/deleteArticle', this.slug)
-        Snackbar.open({
-          message: 'Story has been removed',
-          type: 'is-primary'
-        })
+        this.$buefy.toast.open('Story has been removed')
         this.$router.push('/feed')
       } catch (e) {
-        Snackbar.open({
-          message: `Cannot delete story. Error: ${e}`,
+        this.$buefy.toast.open({
+          message: `Cannot delete story. ${e}`,
           type: 'is-danger'
         })
       }

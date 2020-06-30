@@ -1,13 +1,14 @@
 <template>
   <button
     :class="{ 'is-loading': isFavoriteUpdating }"
-    class="button is-primary-light"
+    class="button is-primary"
     @click.prevent="toggleFavorite"
   >
     <span class="icon is-small">
       <fa :icon="['fas', 'heart']"></fa>
     </span>
-    <span>{{ favoriteLabel }} ({{ favoritesCount }})</span>
+    <span v-if="iconOnly">{{ favoritesCount }}</span>
+    <span v-else>{{ favoriteLabel }} ({{ favoritesCount }})</span>
   </button>
 </template>
 
@@ -26,6 +27,10 @@ export default {
     favoritesCount: {
       type: Number,
       default: 0
+    },
+    iconOnly: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

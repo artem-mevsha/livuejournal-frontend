@@ -11,6 +11,7 @@
         <li>Vue.js+Vuex</li>
         <li>Nuxt (@nuxtjs/auth, @nuxtjs/axios)</li>
         <li>BulmaCSS, nuxt-buefy</li>
+        <li>Cloudinary for image uploading (on the frontend)</li>
       </ul>
       <p>
         Author:
@@ -50,7 +51,7 @@
             target="_blank"
             rel="noreferrer"
           >
-            Laravel realworld project
+            Laravel realworld project. Author: gothinkster
           </a>
         </li>
         <li>

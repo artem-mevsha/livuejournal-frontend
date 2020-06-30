@@ -60,6 +60,7 @@ export const actions = {
           article: {
             title: state.article.title,
             description: state.article.description,
+            coverImage: state.article.coverImage,
             body: state.article.body
           }
         })
@@ -71,7 +72,6 @@ export const actions = {
           }
         })
       }
-
       dispatch('clearArticle')
 
       return response
@@ -86,13 +86,8 @@ export const actions = {
   },
 
   clearArticle({ commit }) {
-    commit('SET_ARTICLE', {
-      title: '',
-      description: '',
-      body: '',
-      bodyHTML: '',
-      tagList: []
-    })
+    commit('SET_ARTICLE', {})
+    commit('SET_COMMENTS', [])
   },
 
   async deleteArticle({ dispatch }, slug) {
@@ -100,14 +95,27 @@ export const actions = {
     dispatch('clearArticle')
   },
 
+  updateArticleImage({ commit, state }, coverImage = null) {
+    commit('SET_ARTICLE', {
+      ...state.article,
+      coverImage
+    })
+  },
+
   async favoriteArticle({ commit }, slug) {
     const response = await this.$axios.$post(`/articles/${slug}/favorite`)
     commit('SET_ARTICLE', response.article)
+
+    // Update list as well. This mutation is needed to update favoritedCount in list
+    commit('feed/UPDATE_ARTICLE_IN_LIST', response.article, { root: true })
   },
 
   async unfavoriteArticle({ commit }, slug) {
     const response = await this.$axios.$delete(`/articles/${slug}/favorite`)
     commit('SET_ARTICLE', response.article)
+
+    // Update list as well. This mutation is needed to update favoritedCount in list
+    commit('feed/UPDATE_ARTICLE_IN_LIST', response.article, { root: true })
   },
 
   async fetchComments({ commit }, slug) {
