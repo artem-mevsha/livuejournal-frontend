@@ -42,6 +42,18 @@ export const mutations = {
   },
   SET_TAGS(state, tags) {
     state.tags = tags
+  },
+  UPDATE_ARTICLE_IN_LIST(state, data) {
+    // mutation is used only for favorite/unfavotire action
+    state.articles = state.articles.map((article) => {
+      if (article.slug !== data.slug) {
+        return article
+      }
+      // Change only favorited and favoritesCount props in state
+      article.favorited = data.favorited
+      article.favoritesCount = data.favoritesCount
+      return article
+    })
   }
 }
 

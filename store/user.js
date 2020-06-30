@@ -18,10 +18,10 @@ export const mutations = {
 
   SET_USER(state, userData) {
     const { email, username, image, bio } = userData
-    state.email = email || state.email
-    state.username = username || state.username
-    state.image = image || state.image
-    state.bio = bio || state.bio
+    state.email = email
+    state.username = username
+    state.image = image
+    state.bio = bio
   },
 
   SET_ERRORS(state, errors) {
@@ -78,5 +78,15 @@ export const actions = {
         type: 'is-danger'
       })
     }
+  },
+
+  updateUserImage({ commit, state }, image = null) {
+    const { email, username, bio } = state
+    commit('SET_USER', {
+      username,
+      email,
+      bio,
+      image
+    })
   }
 }

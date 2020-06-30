@@ -9,22 +9,48 @@
         <lv-errors v-if="errors" :errors="errors" />
 
         <form novalidate @submit.prevent="submitArticle">
-          <b-field label="Title">
-            <b-input
-              v-model.lazy="title"
-              type="text"
-              placeholder="Story title"
-              :disabled="isLoading"
-            ></b-input>
-          </b-field>
-          <b-field label="Description">
-            <b-input
-              v-model.lazy="description"
-              type="text"
-              placeholder="What's this story about?"
-              :disabled="isLoading"
-            ></b-input>
-          </b-field>
+          <div class="columns">
+            <div class="column is-6-desktop">
+              <b-field label="Title">
+                <b-input
+                  v-model.lazy="title"
+                  type="text"
+                  placeholder="Story title"
+                  :disabled="isLoading"
+                ></b-input>
+              </b-field>
+              <b-field label="Description">
+                <b-input
+                  v-model.lazy="description"
+                  type="textarea"
+                  maxlength="255"
+                  placeholder="What's this story about?"
+                  :disabled="isLoading"
+                ></b-input>
+              </b-field>
+              <b-field label="Tags">
+                <b-taginput
+                  v-model="tagList"
+                  ellipsis
+                  placeholder="Add a tag"
+                  :disabled="isLoading || isArticleCreated"
+                >
+                </b-taginput>
+              </b-field>
+            </div>
+            <div class="column is-6-desktop">
+              <b-field label="Cover image" class="cover-image">
+                <lv-image-upload
+                  :image-model="coverImage"
+                  preview-class="is-4by3"
+                  image-width="600"
+                  image-height="480"
+                  @change="onImageChange"
+                  @delete="onImageDelete"
+                />
+              </b-field>
+            </div>
+          </div>
           <b-field label="Body">
             <b-input
               v-model.lazy="body"
@@ -32,15 +58,6 @@
               placeholder="Write your story. You can use markdown"
               :disabled="isLoading"
             ></b-input>
-          </b-field>
-          <b-field label="Tags">
-            <b-taginput
-              v-model="tagList"
-              ellipsis
-              placeholder="Add a tag"
-              :disabled="isLoading || isArticleCreated"
-            >
-            </b-taginput>
           </b-field>
           <div class="buttons">
             <button
@@ -62,24 +79,28 @@ import { mapGetters } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 
 import LvErrors from '@/components/BaseErrors'
+import LvImageUpload from '@/components/ImageUpload'
 
 export default {
   name: 'EditorPage',
   components: {
-    LvErrors
+    LvErrors,
+    LvImageUpload
   },
   middleware: ['auth'],
   async fetch({ store, route, redirect }) {
     const slug = route.params.slug
-    store.dispatch('article/clearArticle')
 
     if (slug) {
-      await store.dispatch('article/fetchArticle', slug)
       if (
+        store.state.auth.user &&
+        store.state.article.author &&
         store.state.auth.user.username !==
-        store.state.article.article.author.username
+          store.state.article.article.author.username
       ) {
         return redirect('/')
+      } else {
+        await store.dispatch('article/fetchArticle', slug)
       }
     }
   },
@@ -102,10 +123,16 @@ export default {
     ...mapFields('article', [
       'article.title',
       'article.description',
+      'article.coverImage',
       'article.body',
       'article.tagList'
     ]),
     ...mapGetters('article', ['errors'])
+  },
+  created() {
+    if (!this.$route.params.slug) {
+      this.$store.dispatch('article/clearArticle')
+    }
   },
   methods: {
     async submitArticle() {
@@ -126,6 +153,14 @@ export default {
       } finally {
         this.isLoading = false
       }
+    },
+
+    onImageChange(fileResponse) {
+      this.$store.dispatch('article/updateArticleImage', fileResponse.public_id)
+    },
+
+    onImageDelete() {
+      this.$store.dispatch('article/updateArticleImage', null)
     }
   },
   head() {
@@ -137,6 +172,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.cover-image
+  max-width: 23.4rem
 .buttons
   margin-top: 1.5rem
 </style>

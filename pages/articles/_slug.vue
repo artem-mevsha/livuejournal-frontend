@@ -9,6 +9,20 @@
           <h4 v-if="article.description" class="subtitle">
             {{ article.description }}
           </h4>
+          <div v-if="hasCoverImage" class="cover-image">
+            <figure class="image is-16by9">
+              <b-skeleton></b-skeleton>
+              <cld-image
+                :public-id="article.coverImage"
+                width="900"
+                height="540"
+                crop="fill"
+                :progressive="true"
+              >
+                <cld-transformation dpr="2.0" />
+              </cld-image>
+            </figure>
+          </div>
           <lv-article-author
             class="article-meta"
             :slug="article.slug"
@@ -58,7 +72,10 @@ export default {
       isAuthenticated: 'isAuthenticated',
       article: 'article/article',
       profile: 'profile/profile'
-    })
+    }),
+    hasCoverImage() {
+      return this.article.coverImage
+    }
   },
   head() {
     return {
@@ -69,6 +86,16 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import "~assets/scss/main"
+
+.cover-image
+  margin: 2rem auto
+  .b-skeleton
+    @include bImageSkeleton
+  .image
+    margin-left: 0
+    margin-right: 0
+
 .article-body
   margin: 1rem 0
 </style>

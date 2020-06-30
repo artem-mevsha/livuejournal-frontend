@@ -1,3 +1,11 @@
+/**
+ * API for uploading images to Cloudinary
+ * can be used like:
+ * await this.$uploadApi.$post('upload', formData)
+ * where formData is 'multipart/form-data' fields
+ * check ~components/ImageUpload.vue file
+ */
+
 export default function({ $axios }, inject) {
   const cloudName = 'artem-demo'
 

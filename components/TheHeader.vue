@@ -114,8 +114,10 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/initial-variables.sass";
-@import "~bulma/sass/utilities/mixins.sass";
+// navbar-menu need to be fixed, so css is not scoped
+
+@import "~bulma/sass/utilities/initial-variables"
+@import "~bulma/sass/utilities/mixins"
 
 .logo
   font-weight: 600

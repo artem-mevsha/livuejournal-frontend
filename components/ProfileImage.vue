@@ -1,12 +1,11 @@
 <template>
-  <figure class="image image" :class="sizeClass">
+  <figure class="image" :class="sizeClass">
     <cld-image
       v-if="profileImage"
       :public-id="profileImage"
       height="128"
       width="128"
       crop="fill"
-      loading="lazy"
     >
       <cld-transformation dpr="2.0" />
     </cld-image>

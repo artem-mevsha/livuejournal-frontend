@@ -45,6 +45,18 @@
           :slug="slug"
           :favorited="favorited"
           :favorites-count="favoritesCount"
+          :icon-only="false"
+        />
+      </div>
+    </div>
+    <div v-else class="media-right">
+      <div class="buttons are-small">
+        <lv-article-button-favorite
+          :v-if="slug.length"
+          :slug="slug"
+          :favorited="favorited"
+          :favorites-count="favoritesCount"
+          :icon-only="true"
         />
       </div>
     </div>
@@ -70,7 +82,7 @@ export default {
   props: {
     slug: {
       type: String,
-      default: ''
+      required: true
     },
     profile: {
       type: Object,
@@ -78,7 +90,7 @@ export default {
     },
     createdAt: {
       type: String,
-      default: ''
+      required: true
     },
     imageSize: {
       type: String,
@@ -90,11 +102,11 @@ export default {
     },
     favorited: {
       type: Boolean,
-      default: false
+      required: true
     },
     favoritesCount: {
       type: Number,
-      default: 0
+      required: true
     }
   },
   computed: {
@@ -104,9 +116,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import "~bulma/sass/utilities/initial-variables.sass";
-@import "~bulma/sass/utilities/mixins.sass";
-@import "~assets/scss/variables";
+@import "~bulma/sass/utilities/initial-variables"
+@import "~bulma/sass/utilities/mixins"
+@import "~assets/scss/variables"
 
 .media
   margin-bottom: 2rem
