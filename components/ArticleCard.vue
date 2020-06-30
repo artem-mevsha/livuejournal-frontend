@@ -69,11 +69,11 @@ export default {
     &.is-horizontal
       display: flex
       .card-image
-        width: 40%
+        width: 30%
         .b-skeleton
           @include bImageSkeleton
       .card-stacked
-        width: 60%
+        width: 70%
         flex-direction: column
         flex: 1 1 auto
         display: flex
@@ -81,21 +81,13 @@ export default {
         .card-content
           flex-grow: 1
 
-+desktop
++desktop-only
   .card
     &.is-horizontal
       .card-image
-        width: 32%
+        width: 43%
       .card-stacked
-        width: 68%
-
-+widescreen
-  .card
-    &.is-horizontal
-      .card-image
-        width: 30%
-      .card-stacked
-        width: 70%
+        width: 57%
 
 .box
   transition: box-shadow .3s ease
