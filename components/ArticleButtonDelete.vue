@@ -38,9 +38,9 @@ export default {
     },
     async deleteArticle() {
       try {
+        this.$router.push('/feed')
         await this.$store.dispatch('article/deleteArticle', this.slug)
         this.$buefy.toast.open('Story has been removed')
-        this.$router.push('/feed')
       } catch (e) {
         this.$buefy.toast.open({
           message: `Cannot delete story. ${e}`,

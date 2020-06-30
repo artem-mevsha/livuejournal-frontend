@@ -10,6 +10,7 @@
           <b-field label="Your avatar">
             <lv-image-upload
               :image-model="image"
+              image-tag="avatar"
               @change="onImageChange"
               @delete="onImageDelete"
             />

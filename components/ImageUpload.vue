@@ -51,6 +51,11 @@ export default {
       validator: (prop) => typeof prop === 'string' || prop === null,
       required: true
     },
+    // e.g: 'avatar', 'coverImage'..
+    imageTag: {
+      type: String,
+      default: ''
+    },
     imageWidth: {
       type: String,
       default: '128'
@@ -102,7 +107,7 @@ export default {
     async onImageChange(file) {
       this.isLoading = true
       try {
-        const response = await this.imageUpload(file, 'avatar')
+        const response = await this.imageUpload(file, this.imageTag)
         this.$emit('change', response)
       } catch (e) {
         this.$buefy.toast.open({

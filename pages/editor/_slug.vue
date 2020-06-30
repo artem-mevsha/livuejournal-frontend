@@ -42,6 +42,7 @@
               <b-field label="Cover image" class="cover-image">
                 <lv-image-upload
                   :image-model="coverImage"
+                  image-tag="coverImage"
                   preview-class="is-4by3"
                   image-width="600"
                   image-height="480"
