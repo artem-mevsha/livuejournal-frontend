@@ -58,6 +58,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    '~/plugins/axios.js',
     '~/plugins/error.filter.js',
     '~/plugins/date.filter.js',
     '~/plugins/cloudinary.js',

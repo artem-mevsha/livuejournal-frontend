@@ -72,7 +72,7 @@ export default {
       return this.$route.query.page || 1
     },
     lastPage() {
-      return Math.round(this.pagination.total / this.pagination.perPage)
+      return Math.ceil(this.pagination.total / this.pagination.perPage)
     },
     pages() {
       return this.paginationGenerator(this.currentPage, this.lastPage, 2)
