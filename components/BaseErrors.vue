@@ -24,3 +24,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.errors-list
+  margin-bottom: 1rem
+</style>

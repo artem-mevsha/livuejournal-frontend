@@ -2,6 +2,10 @@
 
 > Blogging platform build with Nuxt
 
+#### [Demo](https://livuejournal.netlify.app/)
+
+P.S. Backend is running on heroku free dyno. At the first page load, kindly, wait for a few seconds until service is starting.
+
 ## Build Setup
 
 ```bash

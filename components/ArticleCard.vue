@@ -8,7 +8,6 @@
           width="640"
           height="640"
           crop="fill"
-          loading="lazy"
           :progressive="true"
         >
           <cld-transformation dpr="2.0" />

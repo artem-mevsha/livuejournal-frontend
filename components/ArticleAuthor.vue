@@ -22,7 +22,7 @@
         </p>
       </nuxt-link>
     </div>
-    <div v-if="buttonsEnabled" class="media-right">
+    <div v-if="buttonsEnabled && isAuthenticated" class="media-right">
       <div
         v-if="loggedInUser.username === profile.username"
         class="buttons are-small"

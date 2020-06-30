@@ -1,7 +1,11 @@
 <template>
   <button
-    :class="{ 'is-loading': isFavoriteUpdating }"
-    class="button is-primary"
+    :class="{
+      'is-loading': isFavoriteUpdating,
+      'is-light': !favorited,
+      'is-primary': favorited
+    }"
+    class="button"
     @click.prevent="toggleFavorite"
   >
     <span class="icon is-small">
@@ -13,6 +17,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LvArticleButtonFavorite',
   props: {
@@ -39,12 +45,17 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['isAuthenticated']),
     favoriteLabel() {
       return `${this.favorited ? 'Unfavorite' : 'Favorite'} article`
     }
   },
   methods: {
     async toggleFavorite() {
+      if (!this.isAuthenticated) {
+        return this.$router.push('/auth/login')
+      }
+
       const actionName = this.favorited
         ? 'article/unfavoriteArticle'
         : 'article/favoriteArticle'

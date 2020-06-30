@@ -140,8 +140,8 @@ export default {
       const slug = this.$route.params.slug // undefined if new article
       this.isLoading = true
       try {
-        await this.$store.dispatch('article/saveArticle', slug)
-        this.$router.push('/feed')
+        const response = await this.$store.dispatch('article/saveArticle', slug)
+        this.$router.push(`/articles/${response.article.slug}`)
 
         this.$buefy.toast.open('Story has been published')
       } catch (e) {

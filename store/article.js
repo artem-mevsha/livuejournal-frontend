@@ -60,7 +60,7 @@ export const actions = {
           article: {
             title: state.article.title,
             description: state.article.description,
-            coverImage: state.article.coverImage,
+            coverImage: state.article.coverImage || '',
             body: state.article.body
           }
         })
@@ -74,7 +74,7 @@ export const actions = {
       }
       dispatch('clearArticle')
 
-      return response
+      return response.data
     } catch (e) {
       if (e.response) {
         if (e.response.data && e.response.data.errors) {
