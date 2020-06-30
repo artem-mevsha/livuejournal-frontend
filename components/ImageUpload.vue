@@ -48,8 +48,8 @@ export default {
   name: 'LvImageUpload',
   props: {
     imageModel: {
-      validator: (prop) => typeof prop === 'string' || prop === null,
-      required: true
+      type: String,
+      default: null
     },
     // e.g: 'avatar', 'coverImage'..
     imageTag: {
@@ -85,7 +85,7 @@ export default {
         throw new Error('Invalid file format')
       }
 
-      const presetName = process.env.CLOUDINARY_PRESET
+      const presetName = process.env.cloudinaryPreset
 
       const formData = new FormData()
       formData.append('upload_preset', presetName)

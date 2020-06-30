@@ -36,7 +36,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   env: {
-    title: 'LivueJournal'
+    title: 'LivueJournal',
+    cloudinaryName: process.env.CLOUDINARY_NAME,
+    cloudinaryPreset: process.env.CLOUDINARY_PRESET
   },
   /*
    ** Customize the progress-bar color
