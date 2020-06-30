@@ -8,47 +8,11 @@
 
         <form novalidate @submit.prevent="updateUser">
           <b-field label="Your avatar">
-            <figure v-if="image" class="image is-128x128">
-              <cld-image
-                :public-id="image"
-                height="128"
-                width="128"
-                crop="fill"
-                loading="lazy"
-              >
-                <cld-transformation dpr="2.0" />
-              </cld-image>
-              <button
-                class="button is-dark image-delete is-small"
-                type="button"
-                @click="deleteImage"
-              >
-                <span class="icon">
-                  <fa :icon="['fas', 'trash']"></fa>
-                </span>
-              </button>
-            </figure>
-            <b-upload
-              v-else
-              v-model="imageFile"
-              drag-drop
-              type="is-primary"
-              accept="image/*"
-              class="upload"
-              :disabled="isLoading"
-              @input="onImageChange"
-            >
-              <section class="section">
-                <div class="content has-text-centered">
-                  <p>
-                    <span class="icon is-largest">
-                      <fa :icon="['fas', 'upload']"></fa>
-                    </span>
-                  </p>
-                  <p>Drop your files here or click to upload</p>
-                </div>
-              </section>
-            </b-upload>
+            <lv-image-upload
+              :image-model="image"
+              @change="onImageChange"
+              @delete="onImageDelete"
+            />
           </b-field>
           <b-field label="Your name">
             <b-input
@@ -105,15 +69,15 @@
 <script>
 import { mapFields } from 'vuex-map-fields'
 
-import imageUpload from '@/mixins/image-upload'
 import LvErrors from '@/components/BaseErrors'
+import LvImageUpload from '@/components/ImageUpload'
 
 export default {
   name: 'SettingsPage',
   components: {
-    LvErrors
+    LvErrors,
+    LvImageUpload
   },
-  mixins: [imageUpload],
   middleware: ['auth', 'belongs-to-user'],
   async fetch({ store }) {
     await store.dispatch('user/getUser')
@@ -145,28 +109,12 @@ export default {
       this.isLoading = false
     },
 
-    async onImageChange(file) {
-      this.isLoading = true
-      try {
-        const response = await this.imageUpload(file, 'avatar')
-        this.$store.commit('user/SET_USER', {
-          image: response.public_id
-        })
-      } catch (e) {
-        this.$buefy.toast.open({
-          message: e,
-          type: 'is-danger'
-        })
-      } finally {
-        this.isLoading = false
-      }
+    onImageChange(fileResponse) {
+      this.$store.dispatch('user/updateUserImage', fileResponse.public_id)
     },
 
-    deleteImage() {
-      this.imageFile = {}
-      this.$store.commit('user/SET_USER', {
-        image: ''
-      })
+    onImageDelete() {
+      this.$store.dispatch('user/updateUserImage', null)
     }
   },
   page: {
@@ -176,16 +124,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.upload
-  max-width: 13.6rem
-  .section
-    padding: 2rem 1rem
-
-.image-delete
-  position: absolute
-  top: 0.5rem
-  right: 0.5rem
-
 .buttons
   margin-top: 1.5rem
   justify-content: space-between
