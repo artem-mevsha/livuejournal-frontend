@@ -2,7 +2,7 @@
   <nuxt-link :to="`/articles/${article.slug}`" class="card is-horizontal box">
     <div v-if="hasCoverImage" class="card-image">
       <figure class="image is-square">
-        <b-skeleton></b-skeleton>
+        <b-skeleton :animated="false"></b-skeleton>
         <cld-image
           :public-id="article.coverImage"
           width="640"

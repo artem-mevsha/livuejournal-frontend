@@ -11,7 +11,7 @@
           </h4>
           <div v-if="hasCoverImage" class="cover-image">
             <figure class="image is-16by9">
-              <b-skeleton></b-skeleton>
+              <b-skeleton :animated="false"></b-skeleton>
               <cld-image
                 :public-id="article.coverImage"
                 width="900"
